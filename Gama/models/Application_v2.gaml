@@ -23,8 +23,8 @@ global{
 	bool corr 					<- false;
 	//bool enable_applications 	<- false; //variable that triggers when people store their qr on blockchain and can get vaccinated
 	//bool next_people            <- true;//variable that triggers when the next people need to register on the blockchain
-	//bool qr						<- true;//variable that triggers the sending of qr data
-	//bool enable_qr				<- false;
+	bool qr						<- true;//variable that triggers the sending of qr data
+	bool enable_qr				<- false;
 	
 	
 	int count_applications 		<- 0;
@@ -323,13 +323,12 @@ species manager{
 reflex search_qr when:not empty(assigned_to.vaccination_queue){
 	
 		//Busca si existe el agente persona esta almacenado en Blockchain
-		//if qr and enable_qr{
-			//write "Buscando QR"; 
-			//do qr_data(assigned_to.vaccination_queue[0]);
-			//qr <- false;
-		//}
-		
-		if remove_people{
+		if qr = true and enable_qr = true{
+			write "Buscando QR"; 
+			do qr_data(assigned_to.vaccination_queue[0]);
+			qr <- false;
+		}else if remove_people = true and enable_qr = false{
+			write "No buscando QR";
 			do application_data(assigned_to.vaccination_queue[0]);
 			ask assigned_to.vaccination_queue[0]{
 				status 					<- "vaccinated";
@@ -344,16 +343,13 @@ reflex search_qr when:not empty(assigned_to.vaccination_queue){
 			nb_applications  <- nb_applications + 1;
 			remove index:0 from:assigned_to.vaccination_queue;
 			remove_people    <- false;
-			//enable_remove    <- true;
+			if enable_sending_data = false{
+				remove_people	<- true;
+			}
+			
  		}
 		
 }
-
-
-//reflex remove when: enable_remove and remove_people= false and  every(2#cycles){
-	//remove_people  <- true;
-//}
-
 
 	bool request <- false;
 	
@@ -422,6 +418,8 @@ reflex search_qr when:not empty(assigned_to.vaccination_queue){
 	string qr_people(people the_person){
 			if the_person.priority = 1{
 				return "QR" + " " + the_person.curp;	
+			}else if the_person.priority != 1{
+				return "QR" + " " + the_person.curp;
 			}
 	}
 	
@@ -548,10 +546,11 @@ species UDP_Server skills: [network]
 			message s 			<- fetch_message();
 			string transactions <- string(s.contents);
 			write transactions;
-			//qr						<- true;
+			
 			if transactions contains "priority1"{
 				count_applications 		<- count_applications + 1;
 				remove_people			<- true;
+				qr						<- true;
 				write "prioridad 1";
 			}else if transactions contains "priority2"{
 				remove_people			<- true;
@@ -602,12 +601,13 @@ species UDP_Server_Registered skills: [network]
 	
 	action not_apply_vaccine{
 		ask manager{
-			remove index:0 from:assigned_to.vaccination_queue;
+			
 			ask assigned_to.vaccination_queue[0]{
 				target 		<- self.home;
 			}
+			remove index:0 from:assigned_to.vaccination_queue;
 			remove_people 	<- true;
-			//qr				<- true;
+			qr				<- true;
 		}
 	}
 	
@@ -660,6 +660,7 @@ species UDP_Server2 skills: [network]
 		}
 	}
 }
+
 
 
 
