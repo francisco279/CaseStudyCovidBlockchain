@@ -168,4 +168,4 @@ def send_udp_message3(msgFromClient):
     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
 
 #pre_registro(3, 'choscar', '123ccc', '1234')
-#view_Pre_Registro('people50curp')
+#view_Pre_Registro('people347curp')

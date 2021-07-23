@@ -346,8 +346,11 @@ reflex search_qr when:not empty(assigned_to.vaccination_queue){
 			if enable_sending_data = false{
 				remove_people	<- true;
 			}
-			
+
  		}
+ 		if int(timeElapsed/86400) > 8 and remove_people = false{
+				remove_people	<- true;
+		}
 		
 }
 
