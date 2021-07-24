@@ -21,11 +21,11 @@ experiment Several_simulations type:batch until:int(timeElapsed/86400)=60{
 }
 
 experiment gui type:gui{
-	parameter 'enable_sending_data' var:enable_sending_data <- false;
+	parameter 'enable_sending_data' var:enable_sending_data <- true;
 	parameter 'case_study' var:case_study <- "Guadalajara/small";
 	//parameter 'enable_applications' var:enable_applications <- false;
 	parameter 'corr' var:corr <- true;
-	parameter 'qr' var:qr <- true;
+	parameter 'qr' var:qr <- false;
 	parameter 'enable_qr' var:enable_qr <- false;
 	
 	output{

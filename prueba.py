@@ -9,7 +9,7 @@ web3 = Web3(HTTPProvider(blockchain_address))
 def shipping_contracts(account_who_send, account_to_send, vaccine_type,amount_vaccine,proccesses, no_serie_container,date_expiry,shipping_date):
     web3.eth.defaultAccount = web3.eth.accounts[account_who_send]
     compiled_contract_path = 'build/contracts/Vaccine.json'
-    deployed_contract_address = '0x94e78532C83460D8699ca6bF7bbCEfc8fc5a06Be'
+    deployed_contract_address = '0xD441b89325f430d877Ef8a1502C0925FC8E5b608'
     
     with open(compiled_contract_path) as file:
         contract_json = json.load(file) #Load contract info as JSON
@@ -25,7 +25,7 @@ def shipping_contracts(account_who_send, account_to_send, vaccine_type,amount_va
 def reception_contract(address_who_sent, address_who_received, No_serie_container, amount_vaccine, type_vaccine, state, date_reception):
     web3.eth.defaultAccount = web3.eth.accounts[address_who_sent]
     compiled_contract_path = 'build/contracts/Reception.json'
-    deployed_contract_address = '0xE37883eD2eeB77F41C8210A09d564D0b719Ea15F'
+    deployed_contract_address = '0x2608912772dE1126a446C5d2Eeb04B0BA8a03AE2'
 
     with open(compiled_contract_path) as file:
         contract_json = json.load(file) #Load contract info as JSON
@@ -40,7 +40,7 @@ def reception_contract(address_who_sent, address_who_received, No_serie_containe
 def application_contract(date_application, age_people, morbidity):
     web3.eth.defaultAccount = web3.eth.accounts[0]
     compiled_contract_path = 'build/contracts/Application.json'
-    deployed_contract_address = '0x7e70eb50689f9b197131DEbdc477cCFE7Ed07705'
+    deployed_contract_address = '0x46B205d8A3d8C73ED2EFe7C9BDaC12F235254Eb1'
 
     with open(compiled_contract_path) as file:
         contract_json = json.load(file) #Load contract info as JSON
@@ -56,7 +56,7 @@ def application_contract(date_application, age_people, morbidity):
 def send_token(emis, recep, amount):
     web3.eth.defaultAccount = web3.eth.accounts[emis]
     compiled_contract_path = 'build/contracts/MetaCoin.json'
-    deployed_contract_address = '0x6759bdb678aEB40CEa909E866B29FfA0b8FAa024'
+    deployed_contract_address = '0x7558c7d426806881b616069E140F402656705905'
 
     with open(compiled_contract_path) as file:
         contract_json = json.load(file) #Load contract info as JSON
@@ -69,7 +69,7 @@ def send_token(emis, recep, amount):
 def view_Tokens(account):
     
     compiled_contract_path = 'build/contracts/MetaCoin.json'
-    deployed_contract_address = '0x6759bdb678aEB40CEa909E866B29FfA0b8FAa024'
+    deployed_contract_address = '0x7558c7d426806881b616069E140F402656705905'
 
     with open(compiled_contract_path) as file:
         contract_json = json.load(file) #Load contract info as JSON
@@ -88,7 +88,7 @@ def view_Tokens(account):
 def view_Tokens_send(account):
    
     compiled_contract_path = 'build/contracts/MetaCoin.json'
-    deployed_contract_address = '0x6759bdb678aEB40CEa909E866B29FfA0b8FAa024'
+    deployed_contract_address = '0x7558c7d426806881b616069E140F402656705905'
 
     with open(compiled_contract_path) as file:
         contract_json = json.load(file) #Load contract info as JSON
@@ -109,7 +109,7 @@ def view_Tokens_send(account):
 def pre_registro(account_who_stores, name, curp, tel):
     web3.eth.defaultAccount = web3.eth.accounts[account_who_stores]
     compiled_contract_path = 'build/contracts/Pre_vaccination.json'
-    deployed_contract_address = '0x19176A9A64EA5F3d0941c22202f91506D6387887'
+    deployed_contract_address = '0x7B39E7cCA3d1fF2291C8058Cc88534308D500824'
 
     with open(compiled_contract_path) as file:
         contract_json = json.load(file)  # Load contract info as JSON
@@ -121,7 +121,7 @@ def pre_registro(account_who_stores, name, curp, tel):
 
 def view_Pre_Registro(curp):
     compiled_contract_path = 'build/contracts/Pre_vaccination.json'
-    deployed_contract_address = '0x19176A9A64EA5F3d0941c22202f91506D6387887'
+    deployed_contract_address = '0x7B39E7cCA3d1fF2291C8058Cc88534308D500824'
 
     with open(compiled_contract_path) as file:
         contract_json = json.load(file)  # Load contract info as JSON
